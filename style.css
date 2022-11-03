@@ -48,7 +48,7 @@ ul li a {
     display: block;
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1049px) {
     .remove {
         display: none;
     }

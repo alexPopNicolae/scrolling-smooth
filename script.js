@@ -119,25 +119,10 @@ function checkConditions() {
   }
 }
 
- checkConditions();
-
- var timeout = false, // holder for timeout id
-  delay = 250, // delay after event is "complete" to run callback
-  calls = 0;
-
-// window.resize callback function
-function getDimensions() {
-  checkConditions();
-}
-
+checkConditions();
 // window.resize event listener
 window.addEventListener("resize", function () {
-
-    getDimensions();
-  // clear the timeout
- //clearTimeout(timeout);
-  // start timing for event "completion"
-  //timeout = setTimeout(getDimensions, delay);
+    checkConditions();
 });
 
 
