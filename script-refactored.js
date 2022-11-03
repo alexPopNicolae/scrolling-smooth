@@ -1,16 +1,9 @@
-$(document).ready(() => {
-   
-
-// aici trebuie sa selectezi elementele tale    
+$(document).ready(() => {  
 const right = $( '.right' ).first();
 const left = $( '.left' ).first();
 const header = $( '.header' ).first();
 const hamburger = $( '.hamburger' ).first();
-
-//aici pui breakpointurile tale
 const BREAK_POINTS = { XXL: 1920, XL: 1400, L: 1280, M: 1024, S: 800, XS: 500, XXS: 300};
-
-//aici pui spatiile care trebuie respectate
 const SPACE_FOR_BREAK = { XXL: 56, XL: 40, L: 32, M: 20, S: 20, XS: 20, XXS: 20 };
 
 checkConditions();
@@ -24,54 +17,40 @@ function checkConditions() {
   const rightWidth = right.width();
   const leftWidth = left.width();
   const distanceBetwen = headerWidth - rightWidth - leftWidth;
-  const elementsList = [right, left, hamburger];
-
-  const XXL_CONDITION = BREAK_POINTS.XXL < headerWidth && SPACE_FOR_BREAK.XXL > distanceBetwen;
-  const XL_CONDITION = BREAK_POINTS.XXL >= headerWidth && headerWidth > BREAK_POINTS.XL ;
-  const L_CONDITION = BREAK_POINTS.XL >= headerWidth && headerWidth > BREAK_POINTS.L;
-  const M_CONDITION = BREAK_POINTS.L >= headerWidth && headerWidth > BREAK_POINTS.M;
-  const S_CONDITION = BREAK_POINTS.M >= headerWidth && headerWidth > BREAK_POINTS.S;
-  const XS_CONDITION = BREAK_POINTS.S >= headerWidth && headerWidth > BREAK_POINTS.XXS;
-  const XXS_CONDITION = BREAK_POINTS.XXS >= headerWidth && SPACE_FOR_BREAK.XXS > distanceBetwen;
-
-  const conditions = [
-    {label: 'XXL', value: XXL_CONDITION},
-    {label: 'XL', value: XL_CONDITION},
-    {label: 'L', value: L_CONDITION},
-    {label: 'M', value: M_CONDITION},
-    {label: 'S', value: S_CONDITION},
-    {label: 'XS', value: XS_CONDITION},
-    {label: 'XXS', value: XXS_CONDITION},
-];
-
-  const CONDITION = conditions.find(condition => condition.value == true);
-
-
-  if(isDistanceToSmall(CONDITION.label, distanceBetwen)) {
-    addStyling(elementsList)
-  } else {
-    removeStyling(elementsList);
-  }
+  const elementsList = [ {el: right, class:'invisible'}, {el: left, class:'invisible'}, {el: hamburger, class:'visible'}];
+  const conditions = [ 
+    {tag: 'XXL', val: BREAK_POINTS.XXL < headerWidth && SPACE_FOR_BREAK.XXL > distanceBetwen},
+    {tag: 'XL', val: BREAK_POINTS.XXL >= headerWidth && headerWidth > BREAK_POINTS.XL},
+    {tag: 'L', val: BREAK_POINTS.XL >= headerWidth && headerWidth > BREAK_POINTS.L},
+    {tag: 'M', val: BREAK_POINTS.L >= headerWidth && headerWidth > BREAK_POINTS.M},
+    {tag: 'S', val: BREAK_POINTS.M >= headerWidth && headerWidth > BREAK_POINTS.S},
+    {tag: 'XS', val: BREAK_POINTS.S >= headerWidth && headerWidth > BREAK_POINTS.XXS},
+    {tag: 'XXS', val: BREAK_POINTS.XXS >= headerWidth && SPACE_FOR_BREAK.XXS > distanceBetwen}];
+  const ACTIVE_CONDITION = conditions.find( condition => condition.val == true );
+  styleElementsOnCondition( ACTIVE_CONDITION, distanceBetwen, elementsList );
 }
 
+function styleElementsOnCondition( CONDITION, distanceBetwen, elementsList ) {
+    if( isDistanceToSmall( CONDITION.tag, distanceBetwen ) ) {
+        addStyling( elementsList )
+      } else {
+        removeStyling( elementsList );
+    }
+}
 
-function isDistanceToSmall(screenType, distance) {
-    if(distance < SPACE_FOR_BREAK[screenType]) {
+function isDistanceToSmall( screenType, distance ) {
+    if( distance < SPACE_FOR_BREAK[screenType] ) {
         return true;
     }
     return false;
 }
 
-function addStyling(elementsList) {
-        elementsList[0].addClass('invisible');
-        elementsList[1].addClass('invisible');
-        elementsList[2].addClass('visible');
+function addStyling( elementsList ) {
+        elementsList.forEach( ( element ) => element.el.addClass( element.class ) );
 }
 
-function removeStyling(elementsList) {
-    elementsList[0].removeClass('invisible');
-    elementsList[1].removeClass('invisible');
-    elementsList[2].removeClass('visible');
+function removeStyling( elementsList ) {
+    elementsList.forEach( ( element ) => element.el.removeClass( element.class ) );
   };
-
+  
 });
