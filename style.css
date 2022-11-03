@@ -41,12 +41,18 @@ ul li a {
     position: absolute;
     right: 0;
     bottom: 0;
-    
 }
 
-.active {
+.visible {
     display: block;
 }
+
+.invisible {
+    visibility: hidden;
+}
+
+
+
 
 @media screen and (max-width: 1049px) {
     .remove {

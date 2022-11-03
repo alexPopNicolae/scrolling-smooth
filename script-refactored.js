@@ -6,8 +6,6 @@ const right = $( '.right' ).first();
 const left = $( '.left' ).first();
 const header = $( '.header' ).first();
 const hamburger = $( '.hamburger' ).first();
-const styleTag = $( 'style[data-styling]' )[0]; //asta trebuie asa pentru ca ne trebuie tagul pur din dom nu ce returneaza jquery
-
 
 //aici pui breakpointurile tale
 const BREAK_POINTS = { XXL: 1920, XL: 1400, L: 1280, M: 1024, S: 800, XS: 500, XXS: 300};
@@ -26,6 +24,7 @@ function checkConditions() {
   const rightWidth = right.width();
   const leftWidth = left.width();
   const distanceBetwen = headerWidth - rightWidth - leftWidth;
+  const elementsList = [right, left, hamburger];
 
   const XXL_CONDITION = BREAK_POINTS.XXL < headerWidth && SPACE_FOR_BREAK.XXL > distanceBetwen;
   const XL_CONDITION = BREAK_POINTS.XXL >= headerWidth && headerWidth > BREAK_POINTS.XL ;
@@ -49,9 +48,9 @@ function checkConditions() {
 
 
   if(isDistanceToSmall(CONDITION.label, distanceBetwen)) {
-    addStyling(styleTag)
+    addStyling(elementsList)
   } else {
-    removeStyling(styleTag);
+    removeStyling(elementsList);
   }
 }
 
@@ -63,25 +62,16 @@ function isDistanceToSmall(screenType, distance) {
     return false;
 }
 
-function addStyling(tag) {
-    tag.innerHTML = `
-        .right {
-            visibility: hidden;
-        }
-        .left {
-            visibility: hidden;
-        }
-        .hamburger {
-            display: block;
-        }
-        p {
-            color: red;
-        }
-`;
+function addStyling(elementsList) {
+        elementsList[0].addClass('invisible');
+        elementsList[1].addClass('invisible');
+        elementsList[2].addClass('visible');
 }
 
-function removeStyling(tag) {
-    tag.innerHTML = "";
+function removeStyling(elementsList) {
+    elementsList[0].removeClass('invisible');
+    elementsList[1].removeClass('invisible');
+    elementsList[2].removeClass('visible');
   };
 
 });
