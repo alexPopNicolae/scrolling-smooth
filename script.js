@@ -58,31 +58,6 @@ function checkConditions() {
   const leftWidth = left.clientWidth;
   const distanceBetwen = headerWidth - rightWidth - leftWidth;
 
-  console.log("===========");
-  console.log("===========");
-
-  console.log('Header width:');
-  console.log(headerWidth);
-  console.log('Distanta dintre');
-  console.log(distanceBetwen);
-  console.log("Left Width: ");
-  console.log(leftWidth);
-  console.log('right width:');
-  console.log(rightWidth);
-
-  console.log("===========");
-  console.log("===========");
-
-  // width > 1920
-  // width <=1920 && width
-
-  //&& SPACE_FOR_BREAK.XXL > distanceBetwen
-  //&& SPACE_FOR_BREAK.XL > distanceBetwen
-  //&& SPACE_FOR_BREAK.L > distanceBetwen
-  //SPACE_FOR_BREAK.M > distanceBetwen
- // && SPACE_FOR_BREAK.S > distanceBetwen
- //&& SPACE_FOR_BREAK.XXS > distanceBetwen
-
   const XXL_CONDITION = BREAK_POINTS.XXL < headerWidth && SPACE_FOR_BREAK.XXL > distanceBetwen;
   const XL_CONDITION = BREAK_POINTS.XXL >= headerWidth && headerWidth > BREAK_POINTS.XL ;
   const L_CONDITION = BREAK_POINTS.XL >= headerWidth && headerWidth > BREAK_POINTS.L;
