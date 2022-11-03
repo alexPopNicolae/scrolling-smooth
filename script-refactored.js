@@ -35,59 +35,26 @@ function checkConditions() {
   const XS_CONDITION = BREAK_POINTS.S >= headerWidth && headerWidth > BREAK_POINTS.XXS;
   const XXS_CONDITION = BREAK_POINTS.XXS >= headerWidth && SPACE_FOR_BREAK.XXS > distanceBetwen;
 
+  const conditions = [
+    {label: 'XXL', value: XXL_CONDITION},
+    {label: 'XL', value: XL_CONDITION},
+    {label: 'L', value: L_CONDITION},
+    {label: 'M', value: M_CONDITION},
+    {label: 'S', value: S_CONDITION},
+    {label: 'XS', value: XS_CONDITION},
+    {label: 'XXS', value: XXS_CONDITION},
+];
 
-  if (XXL_CONDITION) {
-    if(isDistanceToSmall('XXL', distanceBetwen)) {
-         addStyling(styleTag);
-     } else {
-         removeStyling(styleTag);
-     }
-     
- } else if (XL_CONDITION) {
-     if(isDistanceToSmall('XL', distanceBetwen)) {
-          addStyling(styleTag);
-     } else {
-         removeStyling(styleTag);
-     }
- } else if (L_CONDITION) {
-     if(isDistanceToSmall('L', distanceBetwen)) {
-          addStyling(styleTag);
-     } else {
-         removeStyling(styleTag);
-     }
-     
- } else if (M_CONDITION) {
-     if(isDistanceToSmall('M', distanceBetwen)) {
-          addStyling(styleTag);
-     } else {
-         removeStyling(styleTag);
-     }
-     
- } else if (S_CONDITION) {
-     if(isDistanceToSmall('S', distanceBetwen)) {
-          addStyling(styleTag);
-     } else {
-         removeStyling(styleTag);
-     }
-     
- } else if (XS_CONDITION) {
-     if(isDistanceToSmall('XS', distanceBetwen)) {
-          addStyling(styleTag);
-     }
-     else {
-         removeStyling(styleTag);
-     }
- } else if(XXS_CONDITION) {
-     if(isDistanceToSmall('XXS', distanceBetwen)) {
-          addStyling(styleTag);
-        }
-        else {
-         removeStyling(styleTag);
-     }
-   }
+  const CONDITION = conditions.find(condition => condition.value == true);
 
 
+  if(isDistanceToSmall(CONDITION.label, distanceBetwen)) {
+    addStyling(styleTag)
+  } else {
+    removeStyling(styleTag);
+  }
 }
+
 
 function isDistanceToSmall(screenType, distance) {
     if(distance < SPACE_FOR_BREAK[screenType]) {
