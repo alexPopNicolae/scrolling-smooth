@@ -1,0 +1,55 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+ul {
+    padding: 0;
+}
+ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+ul li a {
+    display: block;
+    color: white;
+}
+
+.header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    background: black;
+    color: white;
+    position: relative;
+}
+
+.right {
+    border: 1px solid white;
+}
+
+
+.left {
+    border: 1px solid white;
+}
+
+.hamburger {
+    font-size: 70px;
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    
+}
+
+.active {
+    display: block;
+}
+
+@media screen and (max-width: 1120px) {
+    .remove {
+        display: none;
+    }
+}
